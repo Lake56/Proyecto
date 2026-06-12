@@ -6,7 +6,7 @@
 
 ## Diagrama de casos de uso
 
-<img width="1334" height="541" alt="Diagrama" src="https://github.com/user-attachments/assets/233adede-6768-4222-9007-f69b0cf151d5" />
+<img width="990" height="711" alt="Diagrama" src="https://github.com/user-attachments/assets/a9248976-dc66-4c61-b096-923ec179b419" />
 
 ## Prototipo Interfaz
 
