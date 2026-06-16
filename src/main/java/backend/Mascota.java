@@ -69,7 +69,7 @@ public abstract class Mascota {
         observers.remove(observer);
     }
 
-    private void notificarObservers() {
+    protected void notificarObservers() {
         for(MascotaObserver observer : observers) {
             observer.actualizar(this);
         }
