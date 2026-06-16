@@ -23,6 +23,7 @@ public class Pez extends Mascota{
     @Override
     public void jugar() {
         setFelicidad(getFelicidad()  + 10);
+        setHambre(getHambre() - 5);
 
         notificarObservers();
     }
