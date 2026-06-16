@@ -38,6 +38,12 @@ public abstract class Mascota {
         this.hambre = Math.max(0, hambre - getDegradacionHambre());
         this.felicidad = Math.max(0, hambre - getDegradacionFelicidad());
         this.higiene = Math.max(0, hambre - getDegradacionHigiene());
+
+        estado.manejarEstado(this);
+
+        actualizarEstado();
+
+        notificarObservers();
     }
 
     private void actualizarEstado() {
