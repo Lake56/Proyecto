@@ -7,13 +7,12 @@ import java.util.ArrayList;
  */
 public class Tienda{
 
-    static private ArrayList<Mascota> Mascota;
+    private ArrayList<Mascota> Mascota;
     private ArrayList<Suministro> Inventario;
-    //cambiar dinero por presupuesto
-    private int Presupuesto;
+    private int Dinero;
 
     public Tienda(int dinero){
-        this.Presupuesto =dinero;
+        this.Dinero=dinero;
         Inventario= new ArrayList<>();
         Mascota=new ArrayList<>();
     }
@@ -22,12 +21,12 @@ public class Tienda{
         if(n==1){
             //se evaluara tener distintos tipos de comida
             Suministro Com= new Comida(5000);
-            Presupuesto -=Com.getPrecio();
+            Dinero-=Com.getPrecio();
             return"compra exitosa";
         }
         else if (n==2){
             Suministro Med= new Medicamento(15000);
-            Presupuesto -=Med.getPrecio();
+            Dinero-=Med.getPrecio();
             Inventario.add(Med);
             return"compra exitosa";
         }
@@ -36,29 +35,16 @@ public class Tienda{
         }
     }
 
-    public String VenderMascota(Mascota m,int Dinero){
-        if(m.getPrecio()<=Dinero){
-            Mascota.remove(m);
-            Presupuesto += m.getPrecio();
-            return "venta exitosa";
-        }
-        else{
-            return "dinero insuficiente";
-        }
+    public String VenderMascota(Mascota m){
+        Mascota.remove(m);
+        Dinero-=m.getPrecio();
+        return "venta exitosa";
     }
 
     public String ComprarMascota(Mascota m){
-        if(Presupuesto>m.getPrecio()) {
-            Mascota.add(m);
-            Presupuesto -= m.getPrecio();
-            return "compra exitosa";
-        }
-        else{
-            return "dinero insuficiente";
-        }
+        Mascota.add(m);
+        Dinero+=m.getPrecio();
+        return "compra exitosa";
     }
 
-    public int getPresupuesto(){
-        return Presupuesto;
-    }
 }
