@@ -46,6 +46,21 @@ public abstract class Mascota {
         notificarObservers();
     }
 
+    public boolean atenderSalud() {
+        if(estado instanceof EstadoEnfermo || estado instanceof EstadoCritico) {
+            setSalud(getSalud() + 40);
+            setFelicidad(getFelicidad() + 10);
+
+            actualizarEstado();
+
+            notificarObservers();
+
+            return true;
+        }
+
+        return false;
+    }
+
     private void actualizarEstado() {
         if(salud < 25 || hambre < 15) {
             this.estado = new EstadoCritico();
