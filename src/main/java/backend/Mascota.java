@@ -36,8 +36,8 @@ public abstract class Mascota {
 
     public void pasarTiempo() {
         this.hambre = Math.max(0, hambre - getDegradacionHambre());
-        this.felicidad = Math.max(0, hambre - getDegradacionFelicidad());
-        this.higiene = Math.max(0, hambre - getDegradacionHigiene());
+        this.felicidad = Math.max(0, felicidad - getDegradacionFelicidad());
+        this.higiene = Math.max(0, higiene - getDegradacionHigiene());
 
         estado.manejarEstado(this);
 
@@ -76,7 +76,7 @@ public abstract class Mascota {
         }
     }
 
-    public void agergarObserver(MascotaObserver observer) {
+    public void agregarObserver(MascotaObserver observer) {
         observers.add(observer);
     }
 
@@ -97,7 +97,6 @@ public abstract class Mascota {
     public int getHambre() {
         return this.hambre;
     }
-
 
     public int getFelicidad() {
         return this.felicidad;
