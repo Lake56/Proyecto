@@ -119,18 +119,18 @@ public abstract class Mascota {
     }
 
     public void setHambre(int hambre) {
-        this.hambre = Math.min(100, hambre);
+        this.hambre = Math.max(0, Math.min(100, hambre));
     }
 
     public void setFelicidad(int felicidad) {
-        this.felicidad = Math.min(100, felicidad);
+        this.felicidad = Math.max(0, Math.min(100, felicidad));
     }
 
     public void setHigiene(int higiene) {
-        this.higiene = Math.min(100, higiene);
+        this.higiene = Math.max(0, Math.min(100, higiene));
     }
 
     public void setSalud(int salud) {
-        this.salud = Math.min(100, salud);
+        this.salud = Math.max(0, Math.min(100, salud));
     }
 }
