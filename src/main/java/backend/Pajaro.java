@@ -25,6 +25,7 @@ public class Pajaro extends Mascota {
     public void jugar() {
         setFelicidad(getFelicidad()  + 30);
         setHambre(getHambre() - 6);
+        setHigiene(getHigiene() - 5);
 
         notificarObservers();
     }

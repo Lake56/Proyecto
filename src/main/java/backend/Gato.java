@@ -8,6 +8,7 @@ public class Gato extends Mascota {
     @Override
     public void alimentar() {
         setHambre(getHambre() + 20);
+        setFelicidad(getFelicidad() + 5);
 
         notificarObservers();
     }
@@ -24,6 +25,7 @@ public class Gato extends Mascota {
     public void jugar() {
         setFelicidad(getFelicidad() + 20);
         setHambre(getHambre() - 5);
+        setHigiene(getHigiene() - 10);
 
         notificarObservers();
     }
