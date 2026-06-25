@@ -8,6 +8,7 @@ public class Pez extends Mascota{
     @Override
     public void alimentar() {
         setHambre(getHambre() + 15);
+        setFelicidad(getFelicidad() + 7);
 
         notificarObservers();
     }
@@ -15,7 +16,7 @@ public class Pez extends Mascota{
     @Override
     public void limpiar() {
         setHigiene(getHigiene() + 50);
-        setSalud(getSalud() + 10);
+        setFelicidad(getFelicidad() - 4);
 
         notificarObservers();
     }
@@ -24,6 +25,7 @@ public class Pez extends Mascota{
     public void jugar() {
         setFelicidad(getFelicidad()  + 10);
         setHambre(getHambre() - 5);
+        setHigiene(getHigiene() - 3);
 
         notificarObservers();
     }
