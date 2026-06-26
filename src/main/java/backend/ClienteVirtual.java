@@ -13,7 +13,7 @@ public class ClienteVirtual{
     private ArrayList<String> Mascotas;
     private ArrayList<String> Nombres;
     private int Dinero;
-    private String Interes;
+    private Mascota Interes;
     private Mascota mascota;
 
     public ClienteVirtual(int Dinero){
@@ -36,9 +36,21 @@ public class ClienteVirtual{
         int rand2= random2.nextInt();
         int rand3= random3.nextInt();
 
+        //aun en testeo
         if(rand1==0){
-            //se ocupara para el metodo comprarmascotatienda
-            Interes=Mascotas.get(rand2);
+            String Nombre= Nombres.get(rand3);
+            if(rand2==0){
+                Interes= new Perro(Nombre,"salchicha",10000);
+            }
+            else if (rand2==1) {
+                Interes= new Gato(Nombre,10000);
+            }
+            else if(rand2==2){
+                Interes= new Pajaro(Nombre,10000);
+            }
+            else{
+                Interes= new Pez(Nombre,10000);
+            }
         }
         else{
             // Precio aun por definir
@@ -60,7 +72,7 @@ public class ClienteVirtual{
 
     //Prototipo de metodos, falta corregir y mejorar
     public String comprarMascotaTienda(Tienda tienda){
-        return (tienda.VenderMascota(mascota, Dinero));
+        return (tienda.VenderMascota(Interes, Dinero));
     }
 
     public void VenderMascotaTienda(Tienda tienda){
