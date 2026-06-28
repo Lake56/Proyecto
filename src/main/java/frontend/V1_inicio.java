@@ -27,7 +27,7 @@ public class V1_inicio extends JFrame {
         tiendagestion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                V2_tienda v2 = new V2_tienda(V1_inicio.this);
+                V2_tienda v2 = new V2_tienda(V1_inicio.this, tienda);
                 v2.setV1(V1_inicio.this);
                 v2.setVisible(true);
                 V1_inicio.this.setVisible(false);

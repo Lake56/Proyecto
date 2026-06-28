@@ -57,6 +57,9 @@ public class Tienda{
             return "dinero insuficiente";
         }
     }
+    public ArrayList<Mascota> getMascotas() {
+        return Mascota;
+    }
 
     public int getPresupuesto(){
         return Presupuesto;
