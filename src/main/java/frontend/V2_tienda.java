@@ -22,7 +22,7 @@ public class V2_tienda extends JFrame {
         this.v1 = v1;
     }
     public V2_tienda(V1_inicio v1, Tienda tienda) {
-        setTitle("Ventana 3");
+        setTitle("Ventana 2");
         setSize(500, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

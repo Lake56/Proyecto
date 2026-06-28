@@ -25,6 +25,10 @@ public class V3_mascotas extends JFrame {
     private JLabel estado;
     private JLabel nombre;
     private JLabel imagen;
+    private JLabel felicidad;
+    private JLabel hambre;
+    private JLabel salud;
+    private JLabel higiene;
     private V1_inicio v1;
 
     private Tienda tienda;
@@ -91,7 +95,11 @@ public class V3_mascotas extends JFrame {
 
     //ventana
     public V3_mascotas(V1_inicio v1, Tienda tienda, int indiceInicial) {
-        setTitle("Ventana 2");
+        this.tienda = tienda;
+        this.listaMascotas = tienda.getMascotas();
+        this.indiceActual = indiceInicial;
+
+        setTitle("Ventana 3");
         setSize(500, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -177,6 +185,25 @@ public class V3_mascotas extends JFrame {
     //actualizará los datos de las mascotas
     public void actualizar(){
 
+        this.listaMascotas = tienda.getMascotas();
+
+        //si no hay mascotas
+        if (listaMascotas.isEmpty()) {
+            nombre.setText("Sin mascotas");
+            estado.setText("-");
+            barraHambre.setValue(0);
+            barraFelicidad.setValue(0);
+            barraHigiene.setValue(0);
+            barraSalud.setValue(0);
+            btnAnterior.setEnabled(false);
+            btnSiguiente.setEnabled(false);
+            return;
+        }
+        //por si hay un reajuste de mascotas
+        if (indiceActual >= listaMascotas.size()) {
+            indiceActual = listaMascotas.size() - 1;
+        }
+
         Mascota m = getMascotaActual();
 
         nombre.setText(m.getNombre());
@@ -190,6 +217,8 @@ public class V3_mascotas extends JFrame {
         boolean hayVarias = listaMascotas.size()>1;
         btnAnterior.setEnabled(hayVarias);
         btnSiguiente.setEnabled(hayVarias);
+
+        cargarImagenMascota(m);
 
     }
 }
