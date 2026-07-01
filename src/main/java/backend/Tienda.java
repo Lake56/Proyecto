@@ -42,15 +42,20 @@ public class Tienda{
         }
     }
 
-    public String VenderMascota(Mascota m,int Dinero){
-        if(m.getPrecio()<=Dinero){
-            Mascota.remove(m);
-            Presupuesto += m.getPrecio();
-            return "venta exitosa";
+    public String VenderMascota(TipoMascota Interes,int Dinero) {
+        for (int i = 0; i < Mascota.size(); i++){
+            Mascota m= Mascota.get(i);
+            if(m.getTipo()==Interes){
+                if(m.getPrecio()<=Dinero){
+                    Presupuesto+=m.getPrecio();
+                    return "Venta Exitosa";
+                }
+                else{
+                    return "Dinero insuficiente";
+                }
+            }
         }
-        else{
-            return "dinero insuficiente";
-        }
+        return "NO hya disponibilidad de esa mascota";
     }
 
     public String ComprarMascota(Mascota m){

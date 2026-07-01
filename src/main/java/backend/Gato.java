@@ -2,7 +2,7 @@ package backend;
 
 public class Gato extends Mascota {
     public Gato(String nombre, float precio) {
-        super(nombre, precio);
+        super(nombre, precio,TipoMascota.GATO);
     }
 
     @Override

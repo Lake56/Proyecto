@@ -11,10 +11,11 @@ public abstract class Mascota {
     private int salud;
     private float precio;
     private EstadoMascota estado;
+    private TipoMascota tipo;
 
     private List<MascotaObserver> observers = new ArrayList<>();
 
-    public Mascota(String nombre, float precio) {
+    public Mascota(String nombre, float precio,TipoMascota tipo) {
         this.nombre = nombre;
         this.hambre = 100;
         this.felicidad = 100;
@@ -22,6 +23,7 @@ public abstract class Mascota {
         this.salud = 100;
         this.precio = precio;
         this.estado = new EstadoSaludable();
+        this.tipo=tipo;
     }
 
 
@@ -132,5 +134,9 @@ public abstract class Mascota {
 
     public void setSalud(int salud) {
         this.salud = Math.max(0, Math.min(100, salud));
+    }
+
+    public TipoMascota getTipo(){
+        return tipo;
     }
 }

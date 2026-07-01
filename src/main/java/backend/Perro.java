@@ -4,7 +4,7 @@ public class Perro extends Mascota {
     private String raza;
 
     public Perro(String nombre, String raza, float precio) {
-        super(nombre, precio);
+        super(nombre, precio,TipoMascota.PERRO);
         this.raza = raza;
     }
 

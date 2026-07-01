@@ -13,7 +13,7 @@ public class ClienteVirtual{
     private ArrayList<String> Mascotas;
     private ArrayList<String> Nombres;
     private int Dinero;
-    private Mascota Interes;
+    private TipoMascota Interes;
     private Mascota mascota;
 
     public ClienteVirtual(int Dinero){
@@ -38,18 +38,17 @@ public class ClienteVirtual{
 
         //aun en testeo
         if(rand1==0){
-            String Nombre= Nombres.get(rand3);
             if(rand2==0){
-                Interes= new Perro(Nombre,"salchicha",10000);
+                Interes= TipoMascota.PERRO;
             }
             else if (rand2==1) {
-                Interes= new Gato(Nombre,10000);
+                Interes= TipoMascota.GATO;
             }
             else if(rand2==2){
-                Interes= new Pajaro(Nombre,10000);
+                Interes= TipoMascota.PAJARO;
             }
             else{
-                Interes= new Pez(Nombre,10000);
+                Interes= TipoMascota.PAJARO;
             }
         }
         else{
