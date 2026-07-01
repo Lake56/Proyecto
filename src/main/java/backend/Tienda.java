@@ -2,25 +2,22 @@ package backend;
 
 import java.util.ArrayList;
 
-/**prototipo del codigo
- **aun no funcional
- */
 public class Tienda{
 
-    static private ArrayList<Mascota> Mascota;
-    private ArrayList<Suministro> Inventario;
-    //cambiar dinero por presupuesto
     private int Presupuesto;
+    private ArrayList<Mascota> Mascota;
+    private ArrayList<Suministro> Inventario;
 
     public Tienda(int dinero){
+
         this.Presupuesto =dinero;
+
         Inventario= new ArrayList<>();
         Mascota=new ArrayList<>();
     }
 
     public String ComprarSuministros(int n){
         if(n==1){
-            //se evaluara tener distintos tipos de comida
             Suministro com= new Comida(5000);
             if (Presupuesto < com.getPrecio()) {
                 return "Dinero insuficiente. Necesitas $" + com.getPrecio() + " y tienes $" + Presupuesto;
@@ -34,11 +31,12 @@ public class Tienda{
             if (Presupuesto < med.getPrecio()) {
                 return "Dinero insuficiente. Necesitas $" + med.getPrecio() + " y tienes $" + Presupuesto;
             }
+            Presupuesto-= med.getPrecio();
             Inventario.add(med);
-            return"compra exitosa";
+            return"Compra exitosa";
         }
         else{
-            return"producto invalido";
+            return"Producto invalido";
         }
     }
 
@@ -48,28 +46,42 @@ public class Tienda{
             if(m.getTipo()==Interes){
                 if(m.getPrecio()<=Dinero){
                     Presupuesto+=m.getPrecio();
-                    return "Venta Exitosa";
+                    Mascota.remove(m);
+                    return "Venta exitosa";
                 }
                 else{
                     return "Dinero insuficiente";
                 }
             }
         }
-        return "NO hya disponibilidad de esa mascota";
+        return "No hay disponibilidad de esa mascota";
     }
 
-    public String ComprarMascota(Mascota m){
-        if(Presupuesto>m.getPrecio()) {
-            Mascota.add(m);
-            Presupuesto -= m.getPrecio();
-            return "compra exitosa";
+    public String ComprarMascota(Mascota mascota){
+        if(Presupuesto> mascota.getPrecio()) {
+            Mascota.add(mascota);
+            Presupuesto -= mascota.getPrecio();
+            return "Compra exitosa";
         }
         else{
-            return "dinero insuficiente";
+            return "Dinero insuficiente";
         }
     }
+
+    public void AgregarMascota(Mascota mascota){
+        Mascota.add(mascota);
+    }
+
+    public void QuitarMascota(Mascota mascota){
+        Mascota.remove(mascota);
+    }
+
     public ArrayList<Mascota> getMascotas() {
         return Mascota;
+    }
+
+    public ArrayList<Suministro> getInventario(){
+        return Inventario;
     }
 
     public int getPresupuesto(){
