@@ -21,14 +21,20 @@ public class Tienda{
     public String ComprarSuministros(int n){
         if(n==1){
             //se evaluara tener distintos tipos de comida
-            Suministro Com= new Comida(5000);
-            Presupuesto -=Com.getPrecio();
+            Suministro com= new Comida(5000);
+            if (Presupuesto < com.getPrecio()) {
+                return "Dinero insuficiente. Necesitas $" + com.getPrecio() + " y tienes $" + Presupuesto;
+            }
+            Presupuesto -= com.getPrecio();
+            Inventario.add(com);
             return"compra exitosa";
         }
         else if (n==2){
-            Suministro Med= new Medicamento(15000);
-            Presupuesto -=Med.getPrecio();
-            Inventario.add(Med);
+            Suministro med= new Medicamento(15000);
+            if (Presupuesto < med.getPrecio()) {
+                return "Dinero insuficiente. Necesitas $" + med.getPrecio() + " y tienes $" + Presupuesto;
+            }
+            Inventario.add(med);
             return"compra exitosa";
         }
         else{

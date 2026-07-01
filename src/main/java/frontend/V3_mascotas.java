@@ -35,11 +35,6 @@ public class V3_mascotas extends JFrame {
     private ArrayList<Mascota> listaMascotas;
     private int indiceActual;
 
-
-    public void setV1(V1_inicio v1){
-        this.v1 = v1;
-    }
-
     private void cargarImagenMascota(Mascota m) {
 
         String nombreArchivo;
