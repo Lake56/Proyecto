@@ -35,59 +35,6 @@ public class V3_mascotas extends JFrame {
     private ArrayList<Mascota> listaMascotas;
     private int indiceActual;
 
-    private void cargarImagenMascota(Mascota m) {
-
-        String nombreArchivo;
-
-        //imagenes por tipo de mascota
-        if (m instanceof backend.Perro) {
-            nombreArchivo = "";
-        } else if (m instanceof backend.Gato) {
-            nombreArchivo = "";
-        } else if (m instanceof backend.Pez) {
-            nombreArchivo = "";
-        } else if (m instanceof backend.Pajaro) {
-            nombreArchivo = "";
-        } else {
-            imagen.setText("No hay imagen");
-            return;
-        }
-
-        try {
-            java.net.URL imgUrl = getClass().getResource(nombreArchivo);
-            if (imgUrl == null) {
-                imagen.setText("Imagen no encontrada");
-                return;
-            }
-
-            java.awt.image.BufferedImage img = javax.imageio.ImageIO.read(imgUrl);
-
-            int ancho;
-            int alto;
-
-            //ajusta el tamaño de la imagen
-            if (imagen.getWidth() >0) {
-                ancho = imagen.getWidth();
-            } else {
-                ancho=150;
-            }
-            if (imagen.getHeight() >0) {
-                alto = imagen.getHeight();
-            } else {
-                alto=150;
-            }
-            //imagen con el tamaño
-            java.awt.Image redimensionada = img.getScaledInstance(ancho, alto, java.awt.Image.SCALE_SMOOTH);
-
-            imagen.setText("");
-            imagen.setIcon(new ImageIcon(redimensionada));
-
-        } catch (Exception ex) {
-            imagen.setText("Error al cargar la imagen");
-            imagen.setIcon(null);
-        }
-    }
-
     //ventana
     public V3_mascotas(V1_inicio v1, Tienda tienda, int indiceInicial) {
         this.tienda = tienda;
@@ -158,7 +105,13 @@ public class V3_mascotas extends JFrame {
         atenderSaludButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                getMascotaActual().pasarTiempo();
+                boolean atendida = getMascotaActual().atenderSalud();
+                if (atendida) {
+                    JOptionPane.showMessageDialog(null, "Salud atendida con éxito.");
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "La mascota ya está saludable.");
+                }
                 actualizar();
             }
         });
@@ -192,8 +145,18 @@ public class V3_mascotas extends JFrame {
             barraSalud.setValue(0);
             btnAnterior.setEnabled(false);
             btnSiguiente.setEnabled(false);
+            alimentarButton.setEnabled(false);
+            jugarButton.setEnabled(false);
+            limpiarHabitatButton.setEnabled(false);
+            atenderSaludButton.setEnabled(false);
             return;
         }
+
+        alimentarButton.setEnabled(true);
+        jugarButton.setEnabled(true);
+        limpiarHabitatButton.setEnabled(true);
+        atenderSaludButton.setEnabled(true);
+
         //por si hay un reajuste de mascotas
         if (indiceActual >= listaMascotas.size()) {
             indiceActual = listaMascotas.size() - 1;
@@ -213,7 +176,59 @@ public class V3_mascotas extends JFrame {
         btnAnterior.setEnabled(hayVarias);
         btnSiguiente.setEnabled(hayVarias);
 
+        imagen.setText("Cargando...");
         cargarImagenMascota(m);
 
     }
+
+    private void cargarImagenMascota(Mascota m) {
+
+        String nombreArchivo;
+
+        //imagenes por tipo de mascota
+        switch (m.getTipo()) {
+            case PERRO: nombreArchivo = "/perro.png"; break;
+            case GATO: nombreArchivo = "/gato.png"; break;
+            case PEZ: nombreArchivo = "/pez.png"; break;
+            case PAJARO: nombreArchivo = "/pajaro.png"; break;
+            default:
+                imagen.setText("Sin imagen");
+                return;
+        }
+
+        try {
+            java.net.URL imgUrl = getClass().getResource(nombreArchivo);
+            if (imgUrl == null) {
+                imagen.setText("Imagen no encontrada");
+                return;
+            }
+
+            java.awt.image.BufferedImage img = javax.imageio.ImageIO.read(imgUrl);
+
+            int ancho;
+            int alto;
+
+            //ajusta el tamaño de la imagen
+            if (imagen.getWidth() >0) {
+                ancho = imagen.getWidth();
+            } else {
+                ancho=150;
+            }
+            if (imagen.getHeight() >0) {
+                alto = imagen.getHeight();
+            } else {
+                alto=150;
+            }
+            //imagen con el tamaño
+            java.awt.Image redimensionada = img.getScaledInstance(ancho, alto, java.awt.Image.SCALE_SMOOTH);
+
+            imagen.setText("");
+            imagen.setIcon(new ImageIcon(redimensionada));
+
+        } catch (Exception ex) {
+            imagen.setText("Error al cargar la imagen");
+            imagen.setIcon(null);
+        }
+    }
+
 }
