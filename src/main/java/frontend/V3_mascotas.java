@@ -41,8 +41,8 @@ public class V3_mascotas extends JFrame {
         this.listaMascotas = tienda.getMascotas();
         this.indiceActual = indiceInicial;
 
-        setTitle("Ventana 3");
-        setSize(500, 500);
+        setTitle("Mascotas");
+        setSize(720, 720);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setContentPane(panelMascotas);

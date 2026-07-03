@@ -17,8 +17,8 @@ public class V1_inicio extends JFrame {
     private backend.Tienda tienda = new backend.Tienda(6767);
 
     public V1_inicio() {
-        setTitle("Ventana 1");
-        setSize(500, 500);
+        setTitle("Inicio");
+        setSize(720, 720);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setContentPane(panelinicio);

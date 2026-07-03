@@ -87,4 +87,24 @@ public class Tienda{
     public int getPresupuesto(){
         return Presupuesto;
     }
+
+    public int getCantidadComida() {
+        int cantidad=0;
+        for (Suministro s : Inventario) {
+            if (s instanceof Comida) {
+                cantidad++;
+            }
+        }
+        return cantidad;
+    }
+
+    public int getCantidadMedicamento() {
+        int cantidad=0;
+        for (Suministro s : Inventario) {
+            if (s instanceof Medicamento) {
+                cantidad++;
+            }
+        }
+        return cantidad;
+    }
 }

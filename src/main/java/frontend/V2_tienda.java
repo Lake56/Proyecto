@@ -25,8 +25,8 @@ public class V2_tienda extends JFrame {
 
         this.tienda = tienda;
 
-        setTitle("Ventana 2");
-        setSize(500, 500);
+        setTitle("Gestionar Tienda");
+        setSize(720, 720);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setContentPane(panelgestion);
@@ -59,8 +59,40 @@ public class V2_tienda extends JFrame {
                 }
             }
         });
+        //ver inventario(suministros y mascotas)
+        btnInventario.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ArrayList<Mascota> lista = tienda.getMascotas();
+                StringBuilder sb = new StringBuilder();
+
+                //suministros
+                sb.append("SUMINISTROS\n");
+                sb.append("-Comida: ").append(tienda.getCantidadComida()).append(" unidades\n");
+                sb.append("-Medicamento: ").append(tienda.getCantidadMedicamento()).append(" unidades\n\n");
+
+                //mascotas
+                sb.append("MASCOTAS\n");
+
+                if (lista.isEmpty()) {
+                    sb.append("No hay mascotas en la tienda.");
+                }
+                else {
+                    sb.append("Mascotas en la tienda:\n");
+                    for (Mascota m : lista) {
+                        sb.append("-").append(m.getNombre())
+                                .append(" (").append(m.getTipo()).append(")") //tipo de ani,al
+                                .append(" | Estado: ").append(m.getEstado().getEstado()) //estado del animal
+                                .append(" | Precio: $").append((int) m.getPrecio()).append("\n"); // precio
+                    }
+                }
+                JOptionPane.showMessageDialog(null, sb.toString(), "Inventario", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+
 
     }
+
     private void actualizarPresupuesto() {
         Presupuesto.setText("Presupuesto: $" +tienda.getPresupuesto());
     }
