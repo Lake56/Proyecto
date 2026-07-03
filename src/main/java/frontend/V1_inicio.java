@@ -14,7 +14,7 @@ public class V1_inicio extends JFrame {
     private JPanel panelinicio;
     public JLabel Tienda;
 
-    private backend.Tienda tienda = new backend.Tienda(6767);
+    private backend.Tienda tienda = new backend.Tienda(70000);
 
     public V1_inicio() {
         setTitle("Inicio");

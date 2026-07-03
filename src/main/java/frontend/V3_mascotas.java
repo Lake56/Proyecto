@@ -165,7 +165,7 @@ public class V3_mascotas extends JFrame {
         Mascota m = getMascotaActual();
 
         nombre.setText(m.getNombre());
-        estado.setText(m.getEstado().getEstado() + m.getEstado().getDescripcion());
+        estado.setText(m.getEstado().getEstado() + ", " + m.getEstado().getDescripcion());
 
         barraHambre.setValue(m.getHambre());
         barraFelicidad.setValue(m.getFelicidad());

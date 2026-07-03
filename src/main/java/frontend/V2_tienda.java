@@ -1,8 +1,13 @@
 package frontend;
 
-//import.backend.ClienteVirtual;
+import backend.ClienteVirtual;
 import backend.Mascota;
 import backend.Tienda;
+import backend.TipoMascota;
+import backend.Perro;
+import backend.Gato;
+import backend.Pajaro;
+import backend.Pez;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -22,7 +27,6 @@ public class V2_tienda extends JFrame {
     private Tienda tienda;
 
     public V2_tienda(V1_inicio v1, Tienda tienda) {
-
         this.tienda = tienda;
 
         setTitle("Gestionar Tienda");
@@ -89,7 +93,37 @@ public class V2_tienda extends JFrame {
                 JOptionPane.showMessageDialog(null, sb.toString(), "Inventario", JOptionPane.INFORMATION_MESSAGE);
             }
         });
+        btnComprarMascota.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String[] tipos = {"Perro ($10.000)", "Gato ($8.000)",
+                        "Pájaro ($8.000)", "Pez ($6.000)"};
+                int eleccion = JOptionPane.showOptionDialog(
+                        null,
+                        "¿Qué mascota deseas comprar?\nPresupuesto: $" + tienda.getPresupuesto(),
+                        "Comprar Mascota", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
+                        null, tipos, tipos[0]
+                );
 
+                if (eleccion<0) return;
+
+                String nombre = JOptionPane.showInputDialog(null,
+                        "¿Qué nombre le pondrás?", "Nombre de la mascota", JOptionPane.QUESTION_MESSAGE);
+
+                if (nombre==null || nombre.trim().isEmpty()) return;
+
+                Mascota nueva = switch (eleccion) {
+                    case 0 -> new Perro(nombre, "salchicha", 10000);
+                    case 1 -> new Gato(nombre, 8000);
+                    case 2 -> new Pajaro(nombre, 8000);
+                    default -> new Pez(nombre, 6000);
+                };
+
+                String resultado = tienda.ComprarMascota(nueva);
+                JOptionPane.showMessageDialog(null, resultado);
+                actualizarPresupuesto();
+            }
+        });
 
     }
 
