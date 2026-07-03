@@ -165,7 +165,7 @@ public class V3_mascotas extends JFrame {
         Mascota m = getMascotaActual();
 
         nombre.setText(m.getNombre());
-        estado.setText(m.getEstado().getEstado() + ", " + m.getEstado().getDescripcion());
+        estado.setText(m.getEstado().getEstado() + ": " + m.getEstado().getDescripcion());
 
         barraHambre.setValue(m.getHambre());
         barraFelicidad.setValue(m.getFelicidad());
@@ -187,10 +187,10 @@ public class V3_mascotas extends JFrame {
 
         //imagenes por tipo de mascota
         switch (m.getTipo()) {
-            case PERRO: nombreArchivo = "/perro.png"; break;
-            case GATO: nombreArchivo = "/gato.png"; break;
-            case PEZ: nombreArchivo = "/pez.png"; break;
-            case PAJARO: nombreArchivo = "/pajaro.png"; break;
+            case PERRO: nombreArchivo = "/perro.jpg"; break;
+            case GATO: nombreArchivo = "/gato.jpg"; break;
+            case PEZ: nombreArchivo = "/pez.jpg"; break;
+            case PAJARO: nombreArchivo = "/pajaro.jpg"; break;
             default:
                 imagen.setText("Sin imagen");
                 return;
@@ -212,12 +212,12 @@ public class V3_mascotas extends JFrame {
             if (imagen.getWidth() >0) {
                 ancho = imagen.getWidth();
             } else {
-                ancho=150;
+                ancho=300;
             }
             if (imagen.getHeight() >0) {
                 alto = imagen.getHeight();
             } else {
-                alto=150;
+                alto=300;
             }
             //imagen con el tamaño
             java.awt.Image redimensionada = img.getScaledInstance(ancho, alto, java.awt.Image.SCALE_SMOOTH);
