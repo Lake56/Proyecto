@@ -8,6 +8,11 @@
 
 <img width="990" height="711" alt="Diagrama" src="https://github.com/user-attachments/assets/a9248976-dc66-4c61-b096-923ec179b419" />
 
+## Diagrama de clases
+
+<img width="3055" height="2262" alt="proyecto" src="https://github.com/user-attachments/assets/63e5a5d8-5339-42c5-accc-386061016616" />
+
+
 ## Prototipo Interfaz
 
 <img width="1366" height="774" alt="WhatsApp Image 2026-06-10 at 23 29 48" src="https://github.com/user-attachments/assets/a8114a79-f069-46f6-8541-d00c99f59445" />
