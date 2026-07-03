@@ -8,7 +8,7 @@
 
 <img width="990" height="711" alt="Diagrama" src="https://github.com/user-attachments/assets/a9248976-dc66-4c61-b096-923ec179b419" />
 
-## Diagraama de clases
+## Diagrama de clases
 
 <img width="3055" height="2262" alt="proyecto" src="https://github.com/user-attachments/assets/63e5a5d8-5339-42c5-accc-386061016616" />
 
