@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class ClienteVirtual{
-    Random random= new Random(2);
-    Random random2= new Random(4);
-    Random random3= new Random(7);
-    Random random4= new Random();
+    Random random = new Random();
 
     private ArrayList<String> Mascotas;
     private ArrayList<String> Nombres;
@@ -17,13 +14,12 @@ public class ClienteVirtual{
     private int eleccion;
 
     public ClienteVirtual(){
-
-        Mascotas=new ArrayList<>();
-        Nombres=new ArrayList<>();
-        this.Dinero= random4.nextInt(5000,10001);
+        Mascotas = new ArrayList<>();
+        Nombres = new ArrayList<>();
+        this.Dinero = random.nextInt(5001) + 5000; // entre 5000 y 10000
 
         Mascotas.add("perro");
-        Mascotas.add("Gato");
+        Mascotas.add("gato");
         Mascotas.add("pez");
         Mascotas.add("pajaro");
 
@@ -34,9 +30,9 @@ public class ClienteVirtual{
         Nombres.add("Calu");
         Nombres.add("Ricky");
 
-        int rand1= random.nextInt();
-        int rand2= random2.nextInt();
-        int rand3= random3.nextInt();
+        int rand1 = random.nextInt(2);
+        int rand2 = random.nextInt(4);
+        int rand3 = random.nextInt(Nombres.size());
 
         if(rand1==0){
             eleccion=1;
@@ -54,22 +50,18 @@ public class ClienteVirtual{
             }
         }
 
-        else{
-            eleccion=2;
-            String Nombre= Nombres.get(rand3);
-            if(rand2==0){
-                mascota= new Perro(Nombre,"salchicha",random4.nextInt(10000-5000+1)+5000);
+        else {
+            eleccion = 2;
+            String Nombre = Nombres.get(rand3);
+            if (rand2 == 0) {
+                mascota = new Perro(Nombre, "salchicha", random.nextInt(10000 - 5000 + 1) + 5000);
+            } else if (rand2 == 1) {
+                mascota = new Gato(Nombre, random.nextInt(10000 - 4000 + 1) + 4000);
+            } else if (rand2 == 2) {
+                mascota = new Pajaro(Nombre, random.nextInt(10000 - 4000 + 1) + 4000);
+            } else {
+                mascota = new Pez(Nombre, random.nextInt(10000 - 4000 + 1) + 4000);
             }
-            else if (rand2==1) {
-                mascota= new Gato(Nombre,random4.nextInt(10000-4000+1)+4000);
-            }
-            else if(rand2==2){
-                mascota= new Pajaro(Nombre,random4.nextInt(10000-4000+1)+4000);
-            }
-            else{
-                mascota= new Pez(Nombre,random4.nextInt(10000-4000+1)+4000);
-            }
-
         }
     }
 
@@ -83,5 +75,13 @@ public class ClienteVirtual{
 
     public void VenderMascotaTienda(Tienda tienda){
         tienda.ComprarMascota(mascota);
+    }
+
+    public TipoMascota getInteres() {
+        return Interes;
+    }
+
+    public int getDinero() {
+        return Dinero;
     }
 }

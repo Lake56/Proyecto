@@ -125,6 +125,88 @@ public class V2_tienda extends JFrame {
             }
         });
 
+        btnVenderMascota.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if (tienda.getMascotas().isEmpty()) {
+                    JOptionPane.showMessageDialog(null,
+                            "No hay mascotas en la tienda para vender.");
+                    return;
+                }
+
+                ClienteVirtual cliente = new ClienteVirtual();
+
+                if (cliente.getEleccion() != 1) {
+                    JOptionPane.showMessageDialog(null,
+                            "El cliente que llegó no quiere adoptar.\nSe fue de la tienda.");
+                    return;
+                }
+
+                TipoMascota tipoDeseado = cliente.getInteres();
+
+                JOptionPane.showMessageDialog(null,
+                        "Llegó un cliente\nBusca adoptar un/a: " + tipoDeseado + "\nDinero disponible: $" + cliente.getDinero(),
+                        "Cliente en tienda",
+                        JOptionPane.INFORMATION_MESSAGE);
+
+                ArrayList<Mascota> coincidencias = new ArrayList<>();
+                for (Mascota m : tienda.getMascotas()) {
+                    if (m.getTipo() == tipoDeseado) {
+                        coincidencias.add(m);
+                    }
+                }
+
+                if (coincidencias.isEmpty()) {
+                    JOptionPane.showMessageDialog(null,
+                            "No tienes " + tipoDeseado + " disponibles.\nEl cliente se fue sin adoptar.",
+                            "Sin disponibilidad",
+                            JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                String[] opciones = new String[coincidencias.size()];
+                for (int i = 0; i < coincidencias.size(); i++) {
+                    Mascota m = coincidencias.get(i);
+                    opciones[i] = m.getNombre()
+                            + " | Estado: " + m.getEstado().getEstado()
+                            + " | Precio: $" + (int) m.getPrecio();
+                }
+
+                String seleccion = (String) JOptionPane.showInputDialog(
+                        null,
+                        "El cliente busca un/a " + tipoDeseado + ". ¿Cuál deseas vender?",
+                        "Elegir mascota a vender",
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        opciones,
+                        opciones[0]
+                );
+
+                if (seleccion == null) {
+                    JOptionPane.showMessageDialog(null,
+                            "Decidiste no vender. El cliente se fue.");
+                    return;
+                }
+
+                int idx = java.util.Arrays.asList(opciones).indexOf(seleccion);
+                Mascota mascotaAVender = coincidencias.get(idx);
+
+                int confirmar = JOptionPane.showConfirmDialog(
+                        null,
+                        "¿Confirmas vender a " + mascotaAVender.getNombre() + "?\n" + "Precio: $" + (int) mascotaAVender.getPrecio() + "\n"
+                                + "Dinero del cliente: $" + cliente.getDinero(), "Confirmar venta", JOptionPane.YES_NO_OPTION
+                );
+
+                if (confirmar == JOptionPane.YES_OPTION) {
+                    String resultado = tienda.VenderMascota(mascotaAVender.getTipo(), cliente.getDinero());
+                    JOptionPane.showMessageDialog(null, resultado);
+                    actualizarPresupuesto();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Venta cancelada. El cliente se fue.");
+                }
+            }
+        });
     }
 
     private void actualizarPresupuesto() {
