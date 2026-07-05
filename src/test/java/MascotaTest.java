@@ -10,7 +10,7 @@ public class MascotaTest {
 
     static class MascotaT extends Mascota {
         public MascotaT(String nombre, float precio) {
-            super(nombre, precio);
+            super(nombre, precio, TipoMascota.PERRO);
         }
 
         @Override
