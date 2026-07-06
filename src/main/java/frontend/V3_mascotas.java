@@ -2,13 +2,14 @@ package frontend;
 
 import backend.Mascota;
 import backend.Tienda;
+import backend.MascotaObserver;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class V3_mascotas extends JFrame {
+public class V3_mascotas extends JFrame implements MascotaObserver{
     private JButton volverMascotas;
     private JPanel panelMascotas;
     private JLabel Mascotas;
@@ -34,6 +35,7 @@ public class V3_mascotas extends JFrame {
     private Tienda tienda;
     private ArrayList<Mascota> listaMascotas;
     private int indiceActual;
+    private Mascota mascotaObservada;
 
     //ventana
     public V3_mascotas(V1_inicio v1, Tienda tienda, int indiceInicial) {
@@ -47,7 +49,8 @@ public class V3_mascotas extends JFrame {
         setLocationRelativeTo(null);
         setContentPane(panelMascotas);
 
-        actualizar();
+        registrarObserver(getMascotaActual());
+        actualizarBotones();
 
         //botones para cambiar de mascota
         btnAnterior.addActionListener(new ActionListener() {
@@ -58,7 +61,8 @@ public class V3_mascotas extends JFrame {
                 } else {
                     indiceActual = listaMascotas.size() -1;
                 }
-                actualizar();
+                registrarObserver(getMascotaActual());
+                actualizarBotones();
             }
         });
 
@@ -70,7 +74,8 @@ public class V3_mascotas extends JFrame {
                 } else {
                     indiceActual = 0;
                 }
-                actualizar();
+                registrarObserver(getMascotaActual());
+                actualizarBotones();
             }
         });
 
@@ -79,7 +84,6 @@ public class V3_mascotas extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 getMascotaActual().alimentar();
-                actualizar();
             }
         });
 
@@ -88,7 +92,6 @@ public class V3_mascotas extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 getMascotaActual().jugar();
-                actualizar();
             }
         });
 
@@ -97,7 +100,6 @@ public class V3_mascotas extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 getMascotaActual().limpiar();
-                actualizar();
             }
         });
 
@@ -112,7 +114,6 @@ public class V3_mascotas extends JFrame {
                     JOptionPane.showMessageDialog(null,
                             "La mascota ya está saludable.");
                 }
-                actualizar();
             }
         });
 
@@ -120,18 +121,39 @@ public class V3_mascotas extends JFrame {
         volverMascotas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                desregistrarObserver();
                 v1.setVisible(true);
                 V3_mascotas.this.setVisible(false);
             }
         });
     }
+
+    @Override
+    public void actualizar(Mascota mascota) {
+        SwingUtilities.invokeLater(this::actualizarBotones);
+    }
+
+    private void registrarObserver(Mascota nueva) {
+        if (mascotaObservada != null) {
+            mascotaObservada.eliminarObserver(this); // deja de observar la anterior
+        }
+        mascotaObservada = nueva;
+        mascotaObservada.agregarObserver(this); // empieza a observar la nueva
+    }
+    private void desregistrarObserver() {
+        if (mascotaObservada != null) {
+            mascotaObservada.eliminarObserver(this);
+            mascotaObservada = null;
+        }
+    }
+
     //obtendra la mascota que se visualiza en pantalla
     private Mascota getMascotaActual() {
         return listaMascotas.get(indiceActual);
     }
 
     //actualizará los datos de las mascotas
-    public void actualizar(){
+    public void actualizarBotones(){
 
         this.listaMascotas = tienda.getMascotas();
 
