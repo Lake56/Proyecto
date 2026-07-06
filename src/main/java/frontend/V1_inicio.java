@@ -7,15 +7,22 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Ventana principal del simulador de  la tienda de mascotas.
+ * Es la entrada del programa y conecta con las demas ventanas.
+ */
 public class V1_inicio extends JFrame {
 
     public JButton tiendagestion;
     public JButton mascotasButton;
     private JPanel panelinicio;
     public JLabel Tienda;
-
     private backend.Tienda tienda = new backend.Tienda(100000);
 
+    /**
+     * Constructor de la ventana principal.
+     * Configura la ventana e inicializa los listeners de los botones de navegación.
+     */
     public V1_inicio() {
         setTitle("Inicio");
         setSize(720, 720);
@@ -23,7 +30,9 @@ public class V1_inicio extends JFrame {
         setLocationRelativeTo(null);
         setContentPane(panelinicio);
 
-        //boton para ir a gestion
+        /**
+         * Dirige a la ventana de gestión de tienda.
+         */
         tiendagestion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -33,7 +42,9 @@ public class V1_inicio extends JFrame {
                 V1_inicio.this.setVisible(false);
             }
         });
-        //boton para ir a las mascotas
+        /**
+         * Dirige a la ventana de mascotas.
+         */
         mascotasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

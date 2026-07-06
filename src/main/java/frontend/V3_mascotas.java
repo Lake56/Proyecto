@@ -9,6 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * Ventana de interacción con las mascotas de la tienda.
+ * Permite al jugador ver y cuidar las mascotas disponibles,
+ * mostrando una lista de ellas.
+ */
 public class V3_mascotas extends JFrame implements MascotaObserver{
     private JButton volverMascotas;
     private JPanel panelMascotas;
@@ -37,7 +42,12 @@ public class V3_mascotas extends JFrame implements MascotaObserver{
     private int indiceActual;
     private Mascota mascotaObservada;
 
-    //ventana
+    /**
+     * Constructor de la ventana de mascotas.
+     * @param v1 referencia a la ventana principal para poder volver a ella.
+     * @param tienda instancia compartida de la tienda con la lista de mascotas.
+     * @param indiceInicial índice de la mascota a mostrar al abrir la ventana.
+     */
     public V3_mascotas(V1_inicio v1, Tienda tienda, int indiceInicial) {
         this.tienda = tienda;
         this.listaMascotas = tienda.getMascotas();
@@ -52,7 +62,9 @@ public class V3_mascotas extends JFrame implements MascotaObserver{
         registrarObserver(getMascotaActual());
         actualizarBotones();
 
-        //botones para cambiar de mascota
+        /**
+         * Navega a la mascota anterior en la lista (dirige al final si está en la primera).
+         */
         btnAnterior.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -66,6 +78,9 @@ public class V3_mascotas extends JFrame implements MascotaObserver{
             }
         });
 
+        /**
+         * Navega a la mascota siguiente en la lista (dirige al inicio si está en la última).
+         */
         btnSiguiente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -79,7 +94,9 @@ public class V3_mascotas extends JFrame implements MascotaObserver{
             }
         });
 
-        //boton alimentar
+        /**
+         * Alimenta a la mascota actual.
+         */
         alimentarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -87,7 +104,9 @@ public class V3_mascotas extends JFrame implements MascotaObserver{
             }
         });
 
-        //boton jugar
+        /**
+         * Juega con la mascota actual.
+         */
         jugarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -95,7 +114,9 @@ public class V3_mascotas extends JFrame implements MascotaObserver{
             }
         });
 
-        //boton limpiar
+        /**
+         * Limpia el hábitat de la mascota actual.
+         */
         limpiarHabitatButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -103,7 +124,10 @@ public class V3_mascotas extends JFrame implements MascotaObserver{
             }
         });
 
-        //boton salud
+        /**
+         * Atiende la salud de la mascota actual si está enferma o en estado crítico.
+         * Si la mascota está saludable, muestra un aviso al jugador.
+         */
         atenderSaludButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -117,7 +141,9 @@ public class V3_mascotas extends JFrame implements MascotaObserver{
             }
         });
 
-        //boton volver
+        /**
+         * Vuelve a la ventana principal.
+         */
         volverMascotas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -128,11 +154,20 @@ public class V3_mascotas extends JFrame implements MascotaObserver{
         });
     }
 
+    /**
+     * Metodo requerido por el observer de mascotas, actualiza sus cambios.
+     * @param mascota la mascota que notificó el cambio.
+     */
     @Override
     public void actualizar(Mascota mascota) {
         SwingUtilities.invokeLater(this::actualizarBotones);
     }
 
+    /**
+     * Desregistra esta ventana como observer de la mascota anterior
+     * y la registra como observer de la nueva mascota recibida.
+     * @param nueva la mascota que se comenzará a observar
+     */
     private void registrarObserver(Mascota nueva) {
         if (mascotaObservada != null) {
             mascotaObservada.eliminarObserver(this); // deja de observar la anterior
@@ -140,6 +175,12 @@ public class V3_mascotas extends JFrame implements MascotaObserver{
         mascotaObservada = nueva;
         mascotaObservada.agregarObserver(this); // empieza a observar la nueva
     }
+
+    /**
+     * Desregistra esta ventana como observer de la mascota actual.
+     * Debe llamarse al cerrar la ventana para liberar la referencia
+     * y evitar que observers queden activos sobre objetos sin ventana.
+     */
     private void desregistrarObserver() {
         if (mascotaObservada != null) {
             mascotaObservada.eliminarObserver(this);
@@ -147,17 +188,24 @@ public class V3_mascotas extends JFrame implements MascotaObserver{
         }
     }
 
-    //obtendra la mascota que se visualiza en pantalla
+    /**
+     * Retorna la mascota en el índice actual de la lista.
+     * @return mascota actualmente seleccionada.
+     */
     private Mascota getMascotaActual() {
         return listaMascotas.get(indiceActual);
     }
 
-    //actualizará los datos de las mascotas
+    /**
+     * Actualiza todos los componentes visuales de la ventana con los datos
+     * de la mascota actualmente seleccionada.
+     * Si no hay mascotas, desactiva todos los botones de acción.
+     * Si el índice quedó fuera de rango (por una venta), lo ajusta al último válido.
+     */
     public void actualizarBotones(){
 
         this.listaMascotas = tienda.getMascotas();
 
-        //si no hay mascotas
         if (listaMascotas.isEmpty()) {
             nombre.setText("Sin mascotas");
             estado.setText("-");
@@ -179,7 +227,6 @@ public class V3_mascotas extends JFrame implements MascotaObserver{
         limpiarHabitatButton.setEnabled(true);
         atenderSaludButton.setEnabled(true);
 
-        //por si hay un reajuste de mascotas
         if (indiceActual >= listaMascotas.size()) {
             indiceActual = listaMascotas.size() - 1;
         }
@@ -203,6 +250,12 @@ public class V3_mascotas extends JFrame implements MascotaObserver{
 
     }
 
+    /**
+     * Carga y muestra la imagen correspondiente al tipo de la mascota recibida.
+     * Las imágenes se leen desde la carpeta resources.
+     * Si la imagen no se encuentra o falla la lectura, muestra un texto de error.
+     * @param m la mascota cuya imagen se desea cargar.
+     */
     private void cargarImagenMascota(Mascota m) {
 
         String nombreArchivo;

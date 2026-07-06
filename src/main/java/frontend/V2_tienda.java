@@ -14,6 +14,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * Ventana de gestión de la tienda de mascotas.
+ * Permite al jugador comprar mascotas y suministros, además de ver el inventario
+ * y simular la llegada de clientes virtuales que desean adoptar mascotas.
+ */
 public class V2_tienda extends JFrame {
     private JButton volverGestion;
     private JPanel panelgestion;
@@ -26,6 +31,11 @@ public class V2_tienda extends JFrame {
 
     private Tienda tienda;
 
+    /**
+     * Constructor de la ventana de gestión de tienda.
+     * @param v1 referencia a la ventana principal, para poder volver a ella.
+     * @param tienda instancia compartida de la tienda con todas sus mascotas y suministros.
+     */
     public V2_tienda(V1_inicio v1, Tienda tienda) {
         this.tienda = tienda;
 
@@ -35,7 +45,10 @@ public class V2_tienda extends JFrame {
         setLocationRelativeTo(null);
         setContentPane(panelgestion);
 
-        //boton volver
+        actualizarPresupuesto();
+        /**
+         * Vuelve a la ventana principal.
+         */
         volverGestion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -44,8 +57,11 @@ public class V2_tienda extends JFrame {
             }
         });
 
-        actualizarPresupuesto();
-
+        /**
+         * Permite al jugador comprar suministros para la tienda.
+         * Muestra un diálogo con las opciones disponibles (comida o medicamento)
+         * y verifica si hay presupuesto suficiente.
+         */
         btnSuministros.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -63,7 +79,12 @@ public class V2_tienda extends JFrame {
                 }
             }
         });
-        //ver inventario(suministros y mascotas)
+
+        /**
+         * Muestra el inventario completo de la tienda, con su
+         * presupuesto actual, cantidad de suministros y lista de mascotas
+         * con su nombre, tipo, estado y precio.
+         */
         btnInventario.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -93,6 +114,12 @@ public class V2_tienda extends JFrame {
                 JOptionPane.showMessageDialog(null, sb.toString(), "Inventario", JOptionPane.INFORMATION_MESSAGE);
             }
         });
+
+        /**
+         * Permite al jugador adquirir una nueva mascota para la tienda.
+         * El jugador elige el tipo y el nombre de la mascota y
+         * esta acción descuenta del presupuesto de la tienda.
+         */
         btnComprarMascota.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -125,6 +152,13 @@ public class V2_tienda extends JFrame {
             }
         });
 
+        /**
+         * Simula la llegada de un cliente que desea adoptar una mascota.
+         * Si el cliente generado no quiere comprar, se informa al jugador.
+         * Si el cliente quiere comprar, se busca una mascota del tipo de su interés
+         * y el jugador decide si venderla.
+         * La venta agrega ingresos al presupuesto de la tienda.
+         */
         btnVenderMascota.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -209,6 +243,10 @@ public class V2_tienda extends JFrame {
         });
     }
 
+    /**
+     * Actualiza el label del presupuesto con el valor actual de la tienda.
+     * Se llama después de cada operación que modifique el presupuesto.
+     */
     private void actualizarPresupuesto() {
         Presupuesto.setText("Presupuesto: $" +tienda.getPresupuesto());
     }
