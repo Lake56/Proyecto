@@ -46,7 +46,7 @@ public class ClienteVirtual{
                 Interes= TipoMascota.PAJARO;
             }
             else{
-                Interes= TipoMascota.PAJARO;
+                Interes= TipoMascota.PEZ;
             }
         }
 

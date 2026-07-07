@@ -50,7 +50,7 @@ public class Perro extends Mascota {
 
     /**
      * Metodo cual retorna el valor que se tiene que degradar el atributo hambre del perro
-     * @return 9 puntos que se degrada este atributo
+     * @return 8 puntos que se degrada este atributo
      */
     @Override
     protected int getDegradacionHambre() {
