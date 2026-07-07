@@ -42,6 +42,8 @@ public class V3_mascotas extends JFrame implements MascotaObserver{
     private int indiceActual;
     private Mascota mascotaObservada;
 
+    private Timer timer;
+
     /**
      * Constructor de la ventana de mascotas.
      * @param v1 referencia a la ventana principal para poder volver a ella.
@@ -60,6 +62,15 @@ public class V3_mascotas extends JFrame implements MascotaObserver{
         setContentPane(panelMascotas);
 
         registrarObserver(getMascotaActual());
+
+        timer = new Timer(3000, e -> {
+            for (Mascota m : tienda.getMascotas()) {
+                m.pasarTiempo();
+            }
+        });
+
+        timer.start();
+
         actualizarBotones();
 
         /**
@@ -100,7 +111,13 @@ public class V3_mascotas extends JFrame implements MascotaObserver{
         alimentarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (tienda.getCantidadComida() == 0) {
+                    JOptionPane.showMessageDialog(null,
+                            "No tienes comida en el inventario.\nCompra una en la tienda.");
+                    return;
+                }
                 getMascotaActual().alimentar();
+                tienda.gastarComida(); // ← limpio y claro
             }
         });
 
@@ -131,12 +148,18 @@ public class V3_mascotas extends JFrame implements MascotaObserver{
         atenderSaludButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (tienda.getCantidadMedicamento() == 0) {
+                    JOptionPane.showMessageDialog(null,
+                            "No tienes medicamentos en el inventario.\nCompra uno en la tienda.");
+                    return;
+                }
                 boolean atendida = getMascotaActual().atenderSalud();
                 if (atendida) {
+                    tienda.gastarMedicamento(); // ← limpio y claro
                     JOptionPane.showMessageDialog(null, "Salud atendida con éxito.");
                 } else {
                     JOptionPane.showMessageDialog(null,
-                            "La mascota ya está saludable.");
+                            "La mascota ya está saludable. No se gastó medicamento.");
                 }
             }
         });
@@ -147,6 +170,7 @@ public class V3_mascotas extends JFrame implements MascotaObserver{
         volverMascotas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                timer.stop();
                 desregistrarObserver();
                 v1.setVisible(true);
                 V3_mascotas.this.setVisible(false);
