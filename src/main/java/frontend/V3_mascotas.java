@@ -59,6 +59,11 @@ public class V3_mascotas extends JFrame implements MascotaObserver{
         setSize(720, 720);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+
+        if (panelMascotas == null) {
+            panelMascotas = new JPanel();
+        }
+
         setContentPane(panelMascotas);
 
         addWindowListener(new java.awt.event.WindowAdapter() {
