@@ -61,7 +61,11 @@ public class V3_mascotas extends JFrame implements MascotaObserver{
         setLocationRelativeTo(null);
         setContentPane(panelMascotas);
 
-        registrarObserver(getMascotaActual());
+        if (!listaMascotas.isEmpty()) {
+            registrarObserver(getMascotaActual());
+        }
+
+        actualizarBotones();
 
         timer = new Timer(3000, e -> {
             for (Mascota m : tienda.getMascotas()) {
@@ -70,8 +74,6 @@ public class V3_mascotas extends JFrame implements MascotaObserver{
         });
 
         timer.start();
-
-        actualizarBotones();
 
         /**
          * Navega a la mascota anterior en la lista (dirige al final si está en la primera).
