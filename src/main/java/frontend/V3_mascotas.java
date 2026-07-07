@@ -61,6 +61,14 @@ public class V3_mascotas extends JFrame implements MascotaObserver{
         setLocationRelativeTo(null);
         setContentPane(panelMascotas);
 
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                timer.stop();
+                desregistrarObserver();
+            }
+        });
+
         if (!listaMascotas.isEmpty()) {
             registrarObserver(getMascotaActual());
         }
@@ -81,10 +89,11 @@ public class V3_mascotas extends JFrame implements MascotaObserver{
         btnAnterior.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (listaMascotas.isEmpty()) return;
                 if (indiceActual > 0) {
                     indiceActual--;
                 } else {
-                    indiceActual = listaMascotas.size() -1;
+                    indiceActual = listaMascotas.size() - 1;
                 }
                 registrarObserver(getMascotaActual());
                 actualizarBotones();
@@ -97,7 +106,8 @@ public class V3_mascotas extends JFrame implements MascotaObserver{
         btnSiguiente.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (indiceActual < listaMascotas.size() -1) {
+                if (listaMascotas.isEmpty()) return;
+                if (indiceActual < listaMascotas.size() - 1) {
                     indiceActual++;
                 } else {
                     indiceActual = 0;
@@ -119,7 +129,7 @@ public class V3_mascotas extends JFrame implements MascotaObserver{
                     return;
                 }
                 getMascotaActual().alimentar();
-                tienda.gastarComida(); // ← limpio y claro
+                tienda.gastarComida();
             }
         });
 
@@ -219,6 +229,8 @@ public class V3_mascotas extends JFrame implements MascotaObserver{
      * @return mascota actualmente seleccionada.
      */
     private Mascota getMascotaActual() {
+        if (listaMascotas.isEmpty()) return null;
+
         return listaMascotas.get(indiceActual);
     }
 

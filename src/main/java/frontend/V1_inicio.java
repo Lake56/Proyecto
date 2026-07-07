@@ -28,6 +28,10 @@ public class V1_inicio extends JFrame {
         setSize(720, 720);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+
+        if (panelinicio == null) {
+            panelinicio = new JPanel();
+        }
         setContentPane(panelinicio);
 
         /**
@@ -37,11 +41,11 @@ public class V1_inicio extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 V2_tienda v2 = new V2_tienda(V1_inicio.this, tienda);
-                //v2.setV1(V1_inicio.this);
                 v2.setVisible(true);
                 V1_inicio.this.setVisible(false);
             }
         });
+
         /**
          * Dirige a la ventana de mascotas.
          */
@@ -49,7 +53,6 @@ public class V1_inicio extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 V3_mascotas v3 = new V3_mascotas(V1_inicio.this, tienda, 0);
-                //v3.setV1(V1_inicio.this);
                 v3.setVisible(true);
                 V1_inicio.this.setVisible(false);
             }

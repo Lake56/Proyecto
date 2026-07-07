@@ -43,9 +43,15 @@ public class V2_tienda extends JFrame {
         setSize(720, 720);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+
+        if (panelgestion == null) {
+            panelgestion = new JPanel();
+        }
+
         setContentPane(panelgestion);
 
         actualizarPresupuesto();
+
         /**
          * Vuelve a la ventana principal.
          */
