@@ -68,6 +68,26 @@ public class Tienda{
         }
     }
 
+    public void gastarComida() {
+        for (int i = 0; i < Inventario.size(); i++) {
+            if (Inventario.get(i) instanceof Comida) {
+                Inventario.remove(i);
+
+                return;
+            }
+        }
+    }
+
+    public void gastarMedicamento() {
+        for (int i = 0; i < Inventario.size(); i++) {
+            if (Inventario.get(i) instanceof Medicamento) {
+                Inventario.remove(i);
+
+                return;
+            }
+        }
+    }
+
     public void AgregarMascota(Mascota mascota){
         Mascota.add(mascota);
     }
