@@ -10,8 +10,7 @@
 
 ## Diagrama de clases
 
-<img width="3055" height="2377" alt="proyecto" src="https://github.com/user-attachments/assets/c35ec6e0-9c24-4bb1-afc9-b16c73837bfd" />
-
+<img width="3055" height="2434" alt="proyecto" src="https://github.com/user-attachments/assets/8cdfae62-ea73-4780-9951-0626bea6ea11" />
 
 ## Prototipo Interfaz
 
