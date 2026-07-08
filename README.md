@@ -4,7 +4,7 @@
 2. Isaac Amadeus Nelson Castro Villalobos
 3. Martin Ignacio Carrasco Perez
 
-## Tema 2:  Simulador de Tienda de Mascotas Virtual (Referente: 
+## Tema 2:  Simulador de Tienda de Mascotas Virtual 
 
 Este simulador ofrecerá al usuario la experiencia de gestionar su propia tienda de mascotas virtual. El jugador comenzará con un presupuesto inicial para adquirir diferentes tipos de mascotas (ej. perros, gatos, peces, pájaros), cada una con atributos y necesidades específicas como alimentación (tipo de comida, frecuencia), higiene, nivel de felicidad, tipo de recinto y salud. El usuario deberá gestionar el inventario de mascotas y de suministros (comida, medicinas). Las interacciones incluirán alimentar a las mascotas, limpiar sus hábitats, jugar con ellas para mantener su felicidad, y atender su salud. El estado de cada mascota deberá ser visible y cambiará según los cuidados recibidos. El sistema también simulará la llegada de clientes virtuales interesados en adoptar mascotas, permitiendo al jugador venderlas y así obtener ingresos para continuar gestionando y expandiendo la tienda.
 
@@ -21,6 +21,7 @@ Este simulador ofrecerá al usuario la experiencia de gestionar su propia tienda
 <img width="1366" height="774" alt="WhatsApp Image 2026-06-10 at 23 29 48" src="https://github.com/user-attachments/assets/a8114a79-f069-46f6-8541-d00c99f59445" />
 <img width="1366" height="768" alt="WhatsApp Image 2026-06-10 at 23 29 48(2)" src="https://github.com/user-attachments/assets/1f07bc16-7b70-42fc-91af-bbeb8796d865" />
 <img width="1366" height="768" alt="WhatsApp Image 2026-06-10 at 23 29 48(1)" src="https://github.com/user-attachments/assets/b2a7b19a-5d19-4c8a-9b21-09bdffee6056" />
+
 
 Un simulador de tienda de mascotas virtuales, entre estas tenemos distintos tipos de mascotas tales como perros, gatos, pájaros y peces, con interacciones como alimentarlos, cuidarlos, pasar tiempo con ellos y limpiar su hábitat, también podemos comprar y vender mascotas a clientes virtuales que aparecerán de vez en cuando en nuestra tienda y como última funcionalidad es la gestión de los alimentos y medicamentos que posee la misma tienda.
 
