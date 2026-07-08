@@ -22,6 +22,12 @@ Este simulador ofrecerá al usuario la experiencia de gestionar su propia tienda
 <img width="1366" height="768" alt="WhatsApp Image 2026-06-10 at 23 29 48(2)" src="https://github.com/user-attachments/assets/1f07bc16-7b70-42fc-91af-bbeb8796d865" />
 <img width="1366" height="768" alt="WhatsApp Image 2026-06-10 at 23 29 48(1)" src="https://github.com/user-attachments/assets/b2a7b19a-5d19-4c8a-9b21-09bdffee6056" />
 
+## Imagenes de la aplicacion
+
+<img width="714" height="712" alt="image" src="https://github.com/user-attachments/assets/6cc6c203-db69-4466-9be5-680847d03da2" />
+<img width="714" height="712" alt="image" src="https://github.com/user-attachments/assets/598a09a2-ca12-4922-a751-4004afe556bb" />
+<img width="711" height="714" alt="image" src="https://github.com/user-attachments/assets/28a7b24f-b7d2-4ae9-aec4-d5938a15ecda" />
+
 
 Un simulador de tienda de mascotas virtuales, entre estas tenemos distintos tipos de mascotas tales como perros, gatos, pájaros y peces, con interacciones como alimentarlos, cuidarlos, pasar tiempo con ellos y limpiar su hábitat, también podemos comprar y vender mascotas a clientes virtuales que aparecerán de vez en cuando en nuestra tienda y como última funcionalidad es la gestión de los alimentos y medicamentos que posee la misma tienda.
 
